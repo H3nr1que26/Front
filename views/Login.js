@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, StyleSheet} from 'react-native';
 import Style from '../assets/css/Css'
-
 export default function Login()
 {
 
