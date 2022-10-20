@@ -17,6 +17,7 @@ const [erroLogin, setErroLogin] = useState(0);
                 <TextInput style={Style.login__input} placeholder='Senha:' secureTextEntry={true} />
                 <TouchableOpacity style={Style.login__button} >
                     <Text style={Style.login__buttonText}>Entrar</Text>
+                    <Link href="Cadastro.js" color="white"></Link>
                 </TouchableOpacity>
 
             </View>

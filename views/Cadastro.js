@@ -18,7 +18,7 @@ const [erroLogin, setErroLogin] = useState(0);
                 <TextInput style={Style.login__input} placeholder='Senha:' secureTextEntry={true} />
                 <TextInput style={Style.login__input} placeholder='Confirme a Senha:' secureTextEntry={true} />
                 <TouchableOpacity style={Style.login__button} >
-                    <Text style={Style.login__buttonText}>Cadastrar</Text>
+                    <link href="Login.js"><Text style={Style.login__buttonText}>Cadastrar</Text></link>
                 </TouchableOpacity>
 
             </View>
