@@ -11,7 +11,7 @@ const [erroLogin, setErroLogin] = useState(0);
             <View style={Style.login__logomarca}>
                 <Image source={require('../assets/img/logomarca.png')} />
             </View>
-
+            <text><h1>Entre no sistema</h1></text>
             <View style={Style.login__form}>
                 <TextInput style={Style.login__input} placeholder='Usuário:' />
                 <TextInput style={Style.login__input} placeholder='Senha:' secureTextEntry={true} />
