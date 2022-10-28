@@ -4,11 +4,11 @@ import Style from "../assets/css/Css";
 import { Text, Button, Input } from "@rneui/themed";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Cadastro({ navigation }) {
-  const [email, setNome] = useState("");
+  const [Nome, setNome] = useState("");
   const [erro, setErro] = useState("");
 
   function ValidarLogin() {
-    if (email == "") {
+    if (Nome == "") {
       setErro("Preencha o nome");
     } else {
       setErro('');
@@ -30,7 +30,7 @@ export default function Cadastro({ navigation }) {
         <Input
           style={{ color: 'white' }}
           placeholder="Nome"
-          onChangeText={(NomelDigitado) => setNome(NomelDigitado)}
+          onChangeText={(NomeDigitado) => setNome(NomeDigitado)}
           rightIcon={<AntDesign name="user" size={24} color="white" />}
         />
         {
