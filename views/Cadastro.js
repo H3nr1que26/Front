@@ -1,29 +1,71 @@
-import React, {useState,useEffect} from 'react';
-import { KeyboardAvoidingView, TextInput, TouchableOpacity, Image, Text, View, StyleSheet} from 'react-native';
-import Style from '../assets/css/Css'
+import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView, Image, View } from "react-native";
+import Style from "../assets/css/Css";
+import { Text, Button, Input } from "@rneui/themed";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+export default function Cadastro({ navigation }) {
+  const [email, setNome] = useState("");
+  const [erro, setErro] = useState("");
 
-export default function Cadastro()
-{
-const [erroLogin, setErroLogin] = useState(0);
+  function ValidarLogin() {
+    if (email == "") {
+      setErro("Preencha o nome");
+    } else {
+      setErro('');
+    }
+  }
 
-    return(
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={Style.container}>
-            <View style={Style.login__logomarca}>
-                <Image source={require('../assets/img/logomarca.png')} />
-            </View>
-            <text><h1>Realize o seu cadastro</h1></text>
-            <View style={Style.login__form}>
-                <TextInput style={Style.login__input} placeholder='Usuário:' />
-                <TextInput style={Style.login__input} placeholder='E-mail:' />
-                <TextInput style={Style.login__input} placeholder='Senha:' secureTextEntry={true} />
-                <TextInput style={Style.login__input} placeholder='Confirme a Senha:' secureTextEntry={true} />
-                <TouchableOpacity style={Style.login__button} >
-                    <link href="Login.js"><Text style={Style.login__buttonText}>Cadastrar</Text></link>
-                </TouchableOpacity>
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={Style.container}
+    >
+      <View style={Style.login__logomarca}>
+        <Image source={require("../assets/img/logomarca.png")} />
+      </View>
 
-            </View>
-        </KeyboardAvoidingView>
-    );
+      <Text style={Style.login__logomarca}>Realize o seu cadastro</Text>
+      <View style={Style.login__form}>
+
+        <Input
+          style={{ color: 'white' }}
+          placeholder="Nome"
+          onChangeText={(NomelDigitado) => setNome(NomelDigitado)}
+          rightIcon={<AntDesign name="user" size={24} color="white" />}
+        />
+        {
+
+          erro != '' ? <Text style={{ color: 'white', alignItems: 'center' }}>Digite o seu nome</Text> : ''
+        }
+        <Input
+          style={{ color: 'white' }}
+          placeholder="E-mail"
+          rightIcon={
+            <MaterialCommunityIcons
+              name="email-outline"
+              size={24}
+              color="white"
+            />
+          }
+        />
+        <Input
+          style={{ color: 'white' }}
+          placeholder="Senha"
+          rightIcon={<AntDesign name="lock" size={24} color="white" />}
+        />
+        <Input
+          style={{ color: 'white' }}
+          placeholder="Confirma Senha"
+          rightIcon={<AntDesign name="lock" size={24} color="white" />}
+        />
+        <Button type="outline" onPress={() => ValidarLogin()}>
+          CADASTRAR
+        </Button>
+
+        <Button type="outline" onPress={() => navigation.navigate("Login")}>
+          VOLTAR
+        </Button>
+      </View>
+    </KeyboardAvoidingView>
+  );
 }
-
-
