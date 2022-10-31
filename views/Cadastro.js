@@ -3,17 +3,41 @@ import { KeyboardAvoidingView, Image, View } from "react-native";
 import Style from "../assets/css/Css";
 import { Text, Button, Input } from "@rneui/themed";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-export default function Cadastro({ navigation }) {
-  const [Nome, setNome] = useState("");
-  const [erro, setErro] = useState("");
 
-  function ValidarLogin() {
+export default function Cadastro({ navigation }) {
+  
+  const [Nome, setNome] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Senha, setSenha] = useState("");
+  const [Confirma, setConfirma] = useState("");
+  const [erro, setErro] = useState("");
+  function ValidaCadastro() {
     if (Nome == "") {
       setErro("Preencha o nome");
     } else {
       setErro('');
     }
+
+    if (Email == "" || Email != "@") {
+      setErro("Preencha o seu Email");
+    } else {
+      setErro('');
+    }
+
+    if (Senha == "" || Senha != "(/^(? =. *[A-Z]. +$/)" || Senha != "(/^(? =. *[a-z]. +$/)" || Senha != "(/^(? =. *[0-9]. +$/)" || Senha.length < 8 || Senha.length < 16) {
+      setErro("Senha Senha inválida");
+    } else {
+      setErro('');
+    }
+
+    if (Confirma != Senha || Confirma == "") {
+      setErro("Senha diferentes");
+    } else {
+      setErro('')
+    }
+
   }
+
 
   return (
     <KeyboardAvoidingView
@@ -35,30 +59,46 @@ export default function Cadastro({ navigation }) {
         />
         {
 
-          erro != '' ? <Text style={{ color: 'white', alignItems: 'center' }}>Digite o seu nome</Text> : ''
+          erro != '' ? <Text style={Style.login__logomarca}>Digite o seu nome</Text> : ''
         }
         <Input
           style={{ color: 'white' }}
           placeholder="E-mail"
-          rightIcon={
-            <MaterialCommunityIcons
-              name="email-outline"
-              size={24}
-              color="white"
-            />
+          onChangeText={(EmailDigitado) => setEmail(EmailDigitado)}
+          rightIcon={<MaterialCommunityIcons name="email-outline" size={24} color="white" />
           }
         />
+
+        {
+          erro != '' ? <Text style={Style.login__logomarca}>Email inválida</Text> : ''
+        }
+
         <Input
           style={{ color: 'white' }}
           placeholder="Senha"
+          secureTextEntry
+          onChangeText={(SenhaDigitado) => setSenha(SenhaDigitado)}
           rightIcon={<AntDesign name="lock" size={24} color="white" />}
         />
+
+        {
+          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : ''
+        }
+
         <Input
           style={{ color: 'white' }}
           placeholder="Confirma Senha"
+          secureTextEntry
+          onChangeText={(ConfirmaDigitado) => setConfirma(ConfirmaDigitado)}
           rightIcon={<AntDesign name="lock" size={24} color="white" />}
         />
-        <Button type="outline" onPress={() => ValidarLogin()}>
+        {
+          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : ''
+        }
+
+
+
+        <Button type="outline" onPress={() => ValidaCadastro()}>
           CADASTRAR
         </Button>
 
