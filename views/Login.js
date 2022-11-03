@@ -8,25 +8,25 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 export default function Login({ navigation }) {
  
   const [erroLogin, setErroLogin] = useState(0);
-  const [Email, setEmail] = useState("");
-  const [erro, setErro] = useState("");
-  const [Senha, setSenha] = useState("");
+  // const [Email, setEmail] = useState("");
+  // const [erro, setErro] = useState("");
+  // const [Senha, setSenha] = useState("");
 
 
-  function ValidarLogin() {
-    if (Email == "" || Email != "@") {
-      setErro("Preencha o seu Email");
-    } else {
-      setErro('');
-    }
+  // function ValidarLogin() {
+  //   if (Email == "" || Email != "@") {
+  //     setErro("Preencha o seu Email");
+  //   } else {
+  //     setErro('');
+  //   }
 
-    if (Senha == "" || Senha.length < 8 || Senha.length < 16) {
-      setErro("Senha inválida");
-    } else {
-      setErro('');
-    }
+  //   if (Senha == "" || Senha.length < 8 || Senha.length < 16) {
+  //     setErro("Senha inválida");
+  //   } else {
+  //     setErro('');
+  //   }
 
-  }
+  // }
 
 
   return (
@@ -42,29 +42,30 @@ export default function Login({ navigation }) {
         <Input
         style={{ color: 'white' }}
           placeholder="E-mail"
-          onChangeText={(EmailDigitado) => setEmail(EmailDigitado)}
+          // onChangeText={(EmailDigitado) => setEmail(EmailDigitado)}
           rightIcon={<MaterialCommunityIcons name="email-outline" size={24} color="white" />}
         />
 
 
-        {
+        {/* {
 
           erro != '' ? <Text style={Style.login__logomarca}>Digite o seu Email</Text> : ''
-        }
+        } */}
 
         <Input
         style={{ color: 'white' }}
           placeholder="Senha"
-          onChangeText={(SenhaDigitado) => setSenha(SenhaDigitado)}
+          secureTextEntry
+          // onChangeText={(SenhaDigitado) => setSenha(SenhaDigitado)}
           rightIcon={<AntDesign name="lock" size={24} color="white" />}
         />
-        {
+        {/* {
 
-          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : ''
-        }
+          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : '' 
+        } */}
 
 
-        <Button type="outline" onPress={() => ValidarLogin()}>
+        <Button type="outline" onPress={() => navigation.navigate("Login")}>
           ENTRAR
         </Button>
 
