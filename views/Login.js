@@ -45,8 +45,6 @@ export default function Login({ navigation }) {
           // onChangeText={(EmailDigitado) => setEmail(EmailDigitado)}
           rightIcon={<MaterialCommunityIcons name="email-outline" size={24} color="white" />}
         />
-
-
         {/* {
 
           erro != '' ? <Text style={Style.login__logomarca}>Digite o seu Email</Text> : ''

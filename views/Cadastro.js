@@ -3,37 +3,56 @@ import { KeyboardAvoidingView, Image, View } from "react-native";
 import Style from "../assets/css/Css";
 import { Text, Button, Input } from "@rneui/themed";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import instance from "../api/ApiManager";
 
 export default function Cadastro({ navigation }) {
-  
+  // useEffect(() => {
+  //   instance
+  //     .post("http://usuario/cadastro", {
+  //       usu_nome: Nome,
+  //       usu_email: Email,
+  //       usu_senha: Senha,
+
+  //     })
+  //     .then((response) => setUser(response.data))
+  //     .catch((err) => {
+  //       console.error("ops! ocorreu um erro" + err);
+  //     });
+  // }, []);
+
+
   const [Nome, setNome] = useState("");
   const [Email, setEmail] = useState("");
   const [Senha, setSenha] = useState("");
   const [Confirma, setConfirma] = useState("");
-  const [erro, setErro] = useState("");
+  const [erronome, setnome] = useState("");
+  const [erroemail, setemail] = useState("");
+  const [errosenha, setsenha] = useState("");
+  const [erroconfirma, setconfirma] = useState("");
+
   function ValidaCadastro() {
+    setnome("");
     if (Nome == "") {
-      setErro("Preencha o nome");
-    } else {
-      setErro('');
+      setnome("Preencha o nome");
     }
 
-    if (Email == "" || Email != "@") {
-      setErro("Preencha o seu Email");
-    } else {
-      setErro('');
+    setemail("");
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(Email) === false) {
+      console.log("Email is Not Correct");
+      setemail("Preencha um E-Mail válido!");
     }
 
-    if (Senha == "" || Senha != "(/^(? =. *[A-Z]. +$/)" || Senha != "(/^(? =. *[a-z]. +$/)" || Senha != "(/^(? =. *[0-9]. +$/)" || Senha.length < 8 || Senha.length < 16) {
-      setErro("Senha Senha inválida");
-    } else {
-      setErro('');
-    }
+    // setsenha("");
+    // let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+    // if (reg.test(Senha) === false) {
+    //   ///console.log("Email is Not Correct");
+    //   setsenha("Preencha um E-Mail válido!");
+    // }
 
+    setconfirma("");
     if (Confirma != Senha || Confirma == "") {
-      setErro("Senha diferentes");
-    } else {
-      setErro('')
+      setconfirma("Senha diferentes");
     }
 
   }
@@ -50,53 +69,58 @@ export default function Cadastro({ navigation }) {
 
       <Text style={Style.login__logomarca}>Realize o seu cadastro</Text>
       <View style={Style.login__form}>
-
         <Input
-          style={{ color: 'white' }}
+          style={{ color: "white" }}
           placeholder="Nome"
           onChangeText={(NomeDigitado) => setNome(NomeDigitado)}
           rightIcon={<AntDesign name="user" size={24} color="white" />}
         />
-        {
-
-          erro != '' ? <Text style={Style.login__logomarca}>Digite o seu nome</Text> : ''
-        }
+        {erronome != "" ? (
+          <Text style={Style.mensagenNome}>Digite o seu nome</Text>
+        ) : (
+          ""
+        )}
         <Input
-          style={{ color: 'white' }}
+          style={{ color: "white" }}
           placeholder="E-mail"
           onChangeText={(EmailDigitado) => setEmail(EmailDigitado)}
-          rightIcon={<MaterialCommunityIcons name="email-outline" size={24} color="white" />
+          rightIcon={
+            <MaterialCommunityIcons
+              name="email-outline"
+              size={24}
+              color="white"
+            />
           }
         />
 
-        {
-          erro != '' ? <Text style={Style.login__logomarca}>Email inválida</Text> : ''
-        }
+        {erroemail != "" ? (<Text style={Style.mensagenEmail}>Email inválida</Text>) : ("")}
 
         <Input
-          style={{ color: 'white' }}
+          style={{ color: "white" }}
           placeholder="Senha"
           secureTextEntry
           onChangeText={(SenhaDigitado) => setSenha(SenhaDigitado)}
           rightIcon={<AntDesign name="lock" size={24} color="white" />}
         />
 
-        {
-          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : ''
-        }
+        {errosenha != "" ? (
+          <Text style={Style.mensagenConfirma}>Senha inválida</Text>
+        ) : (
+          ""
+        )}
 
         <Input
-          style={{ color: 'white' }}
+          style={{ color: "white" }}
           placeholder="Confirma Senha"
           secureTextEntry
           onChangeText={(ConfirmaDigitado) => setConfirma(ConfirmaDigitado)}
           rightIcon={<AntDesign name="lock" size={24} color="white" />}
         />
-        {
-          erro != '' ? <Text style={Style.login__logomarca}>Senha inválida</Text> : ''
-        }
-
-
+        {erroconfirma != "" ? (
+          <Text style={Style.mensagenConfirma}> Senha não corespondem </Text>
+        ) : (
+          ""
+        )}
 
         <Button type="outline" onPress={() => ValidaCadastro()}>
           CADASTRAR
